@@ -1,0 +1,47 @@
+<a-layout>
+  <a-layout-header class="emma-header">
+    <div class="emma-title">
+      模板配置
+    </div>
+  </a-layout-header>
+  <a-layout-content class="emma-content">
+    <a-row class="emma-main">
+      <a-col :span="6" class="emma-left">
+        <div>
+           <a-select
+            mode="default"
+            size="default"
+            placeholder="请选择模板"
+            @change="changeTemplate"
+            class="emma-select"
+          >
+            <a-select-option v-for="(i, index) in templateList" :key="index">
+              {{i}}模板
+            </a-select-option>
+          </a-select>
+        </div>
+        <div>
+          <a-input placeholder="请输入添加文件名" @keyup.enter="addTag" v-model="tagValue" />
+        </div>
+        <div class="emma-file-list">
+          <a-tag closable @close="delTag($event, tag)" class="emma-tag" v-for="(tag, index) in tags" :key="index">{{tag}}</a-tag>
+        </div>
+      </a-col>
+      <a-col :span="18" class="emma-right">
+        <div>
+          <div>
+            请选择css:&nbsp;&nbsp;
+            <a-radio-group @change="changeCss" v-model="css">
+              <a-radio :value="0">无</a-radio>
+              <a-radio :value="1">css</a-radio>
+              <a-radio :value="2">scss</a-radio>
+            </a-radio-group>
+          </div>
+        </div>
+        <div class="emma-submit">
+          <a-button type="primary" @click="submit">提交</a-button>
+        </div>
+      </a-col>
+    </a-row>
+  </a-layout-content>
+</a-layout>
