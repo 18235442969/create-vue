@@ -62,8 +62,9 @@
               tags: this.tags,
               css: this.css
             }).then(res => {
-              console.log(res)
+              this.$message.success('创建成功');
             }).catch(error => {
+              this.$message.error('创建失败');
               console.log(error)
             })
           }

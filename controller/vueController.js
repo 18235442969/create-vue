@@ -56,17 +56,15 @@ const createTemplate = async (ctx) => {
       //创建页面文件夹
       fs.mkdirSync(path.join(__dirname, `../assets/dist/${e}`));
       const cssOption = ['css', 'css', 'scss'];
+      //编写scss文件
       if (css === 2) {
-        //编写scss文件
         fs.writeFileSync(path.join(__dirname, `../assets/dist/${e}/index.${cssOption[css]}`), '');
-        if (css === 2) {
-          //引入scss文件
-          let index = text.indexOf('scoped>');
-          text = text.replace(/css/, "@import './index.scss';");
-          text = text.slice(0, index) + 'lang="scss" ' + text.slice(index);
-        } else {
-          text = text.replace(/css/, '');
-        }
+        //引入scss文件
+        let index = text.indexOf('scoped>');
+        text = text.replace(/css/, "@import './index.scss';");
+        text = text.slice(0, index) + 'lang="scss" ' + text.slice(index);
+      } else {
+        text = text.replace(/css/, '');
       }
       //输出内容到生成页面文件
       fs.writeFileSync(path.join(__dirname, `../assets/dist/${e}/index.vue`), text, 'utf8');
